@@ -1,0 +1,278 @@
+{
+  "metadata": {
+    "title": "Nordic Atlas Packaging | Bæredygtige Genanvendelige Poser",
+    "description": "Skræddersyede genanvendelige stofposer til butikker og brands. EU-godkendt produktion direkte fra producenten.",
+    "aboutTitle": "Om Os | Nordic Atlas Packaging",
+    "aboutDescription": "EU-godkendt emballage — bæredygtige poser der styrker din synlighed.",
+    "solutionsTitle": "Løsninger | Nordic Atlas Packaging",
+    "solutionsDescription": "Udforsk alle de måder, vi hjælper virksomheder med at vokse.",
+    "contactTitle": "Kontakt | Nordic Atlas Packaging",
+    "contactDescription": "Fortæl os om dit behov — vi står klar til at hjælpe.",
+    "designTitle": "Design Din Pose | Nordic Atlas Packaging",
+    "designDescription": "Vælg din posetype og design din egen branding online.",
+    "configuratorToteTitle": "Tote Bag Konfigurator | Nordic Atlas Packaging",
+    "configuratorRetailTitle": "Detail Pose Konfigurator | Nordic Atlas Packaging"
+  },
+  "nav": {
+    "home": "Hjem",
+    "about": "Om Os",
+    "solutions": "Løsninger",
+    "contact": "Kontakt",
+    "cta": "Book et møde",
+    "designCTA": "Design Din Pose",
+    "language": "Sprog"
+  },
+  "home": {
+    "heroTag": "Empowering brands towards a sustainable future",
+    "heroTitle": "Til Lokale & Globale Detailhandlere & Brands",
+    "heroDescription": "Vi designer skræddersyede genanvendelige stofposer, der erstatter engangsplastik og forvandler dine kunder til mobil brand-eksponering. Hver pose fungerer som et bæredygtigt, genanvendeligt reklameskilt med dit logo – i brug igen og igen, længe efter købet.",
+    "aboutLink": "Om os",
+    "aboutTitle": "Bæredygtige vækstløsninger til butikker og brands",
+    "aboutDescription": "Vores mission er at erstatte engangs-emballage med genanvendelige stofposer, som folk rent faktisk vil bruge. Vi hjælper brands med at være synlige i hverdagen — på gaden, på arbejde, i fitness og i supermarkeder — samtidig med at plastikaffald reduceres og ansvarligt forbrug fremmes.",
+    "counterBags": "Bæreposer produceret",
+    "counterBagsDescription": "Vi gennemfører et stigende antal af projekter hvert år!",
+    "counterSatisfaction": "Kundetilfredshed",
+    "counterSatisfactionDescription": "Vi yder vores bedste for at skabe et ved- og langvarende forhold. Jeres tilfredshed er det vigtigste for os - hvert et skridt hen af vejen.",
+    "processTitle": "Vores proces",
+    "processSubtitle": "Fra idé til levering – gjort enkelt",
+    "processCta": "Se dine muligheder",
+    "step1Title": "Brandanalyse",
+    "step1Description": "Vi lærer dit brand og målgruppe at kende, og hvordan poser vil blive brugt — i butikker, til events, giveaways eller e-handel.",
+    "step2Title": "Design & Mockups",
+    "step2Description": "Vores team laver posedesigns med dit logo, dine farver og budskab. Du godkender det endelige design før produktion.",
+    "step3Title": "Produktion & Kvalitetstjek",
+    "step3Description": "Vi producerer dine genanvendelige poser med ensartet tryk, stærke syninger og holdbare materialer.",
+    "step4Title": "Levering & Brandeksponering",
+    "step4Description": "Poserne leveres til din adresse, klar til at blive givet til dine kunder — så hver pose bliver gratis reklame for dit brand."
+  },
+  "about": {
+    "heroSubtitle": "Løsninger til butikker og brands — lokale og internationale",
+    "heroTitle": "Bæredygtige non-woven bæreposer",
+    "heroDescription": "Et holdbart alternativ til engangsplast. Til butikker, takeaway og detail. Direkte fra producenten",
+    "heroCta": "Kom i gang",
+    "heroCounter": "Kunder globalt.",
+    "certTag": "Powering brands with clean bags",
+    "certDescription": "EU-godkendt emballage — bæredygtige poser der styrker din synlighed. Vi leverer høj kvalitet og en skalerbar leveringskæde. Sammen skaber vi genanvendelige løsninger, der bygger dit brand — og gør det synligt i hele Europa.",
+    "certBadge": "EU-compliant packaging.",
+    "solutionTitle": "Fremtidssikret emballage til din forretning",
+    "solutionSubtitle": "Nord Atlas Packaging tilpasset emballage – på dine vilkår",
+    "solutionCta": "Find din løsning",
+    "solution1Title": "Ren og bæredygtig produktion",
+    "solution1Description": "EU-godkendt produktion direkte fra producenten. Stabil kvalitet og skalerbare løsninger.",
+    "solution2Title": "Klimabevidste valg",
+    "solution2Description": "Vi prioriterer renere materialer og ansvarlig sourcing. Emballage, der lever op til moderne bæredygtighedskrav – uden at gå på kompromis med funktion.",
+    "solution3Title": "Direkte levering. Pålidelig support",
+    "solution3Description": "Klare tidsplaner, hurtig levering og direkte kontakt – fra første dialog til færdigt produkt.",
+    "portfolioTitle": "Skræddersyet Emballageløsninger",
+    "portfolio1Title": "Mad & Dagligvarer",
+    "portfolio1Description": "Holdbare, genanvendelige poser designet til restauranter, dagligvarekæder og madleveringstjenester",
+    "portfolio2Title": "Butikker & Merchandise",
+    "portfolio2Description": "Genanvendelige premiumposer til tøjmærker, butikker, boghandlere og events.",
+    "portfolio3Title": "Firma & Kampagne",
+    "portfolio3Description": "Rene, brandede poser til konferencer, hoteller, messer, produktlanceringer og marketingkampagner.",
+    "portfolio4Title": "Bæredygtigt Skræddersyet Branding",
+    "portfolio4Description": "Bæredygtighed fra kilden. Vedvarende energi, dygtigt håndværk og bedre poser.",
+    "whyChooseTag": "Why choose us",
+    "whyChooseTitle": "At skabe et mere bæredygtigt Skandinavien er kernen i Nordic Atlas' mission",
+    "whyChooseCounter": "Fra små butikker til store retail-kæder — virksomheder som jeres vælger os.",
+    "whyChooseCta": "Kontakt os",
+    "processLeftTitle": "Effektiv forberedelse for kvalitet",
+    "processRightTitle": "Konsekvent ensartet produktion",
+    "process1Title": "Forproduktion",
+    "process1Description": "Vi færdiggør design, branding, placering af grafik, materialer, størrelser og trykmetode. Når alt er godkendt, går ordren i produktion med en fastlagt tidsplan.",
+    "process2Title": "Produktion",
+    "process2Description": "Dine poser sættes i produktion. Vi fremstiller først prøver til godkendelse, før fuld produktion fortsætter. Hvert trin kvalitetstjekkes.",
+    "process3Title": "Afsendelse",
+    "process3Description": "Når produktionen er færdig, pakkes ordren sikkert og sendes direkte til din leveringsadresse. Sporing og alle eksportdokumenter medfølger.",
+    "faqTitle": "Ofte stillede spørgsmål",
+    "faq1Question": "Hvilke materialer er jeres poser lavet af?",
+    "faq1Answer": "Vi bruger non-woven polypropylen (PP), bomuldsblandinger og andre genanvendelige materialer – afhængigt af dine behov. Alle materialer er EU-godkendte, slidstærke og kan tilpasses fuldt ud.",
+    "faq2Question": "Kan jeg få poser med mit eget logo og design?",
+    "faq2Answer": "Ja. Vi tilbyder fuld tilpasning, herunder logo, farver, grafik, trykfinish og størrelser. Vores designteam hjælper med mockups, så dit udtryk er ensartet på tværs af alle ordrer.",
+    "faq3Question": "Hvad er minimumsbestillingen?",
+    "faq3Answer": "Vores standard minimumsbestilling ligger typisk på 3.000–5.000 stk., afhængigt af model og tilpasningsgrad. Større mængder giver lavere stykpris.",
+    "faq4Question": "Hvor lang er produktion- og leveringstiden?",
+    "faq4Answer": "Produktion tager normalt 10–18 dage, efterfulgt af 7–14 dages levering, afhængigt af destination og fragtmetode. Du får altid en klar tidsplan på forhånd.",
+    "faq5Question": "Tilbyder I prøver før masseproduktion?",
+    "faq5Answer": "Ja. Vi tilbyder både digitale prøver og fysiske forproduktionsprøver efter aftale, så du kan godkende materialer, tryk og størrelser, før produktionen går i gang."
+  },
+  "solutions": {
+    "bannerTitle": "Vores løsninger",
+    "bannerSubtitle": "Udforsk alle de måder, vi hjælper virksomheder med at vokse – fra idé og design til færdig løsning og videre.",
+    "services": {
+      "dagligvarer": {
+        "number": "01",
+        "title": "Dagligvarer",
+        "summary": "Holdbare, genanvendelige bæreposer til supermarkeder og discountkæder — klar med dit logo, i store mængder.",
+        "tags": "Non-woven, Storordre, Logo-tryk, EU-godkendt"
+      },
+      "mad": {
+        "number": "02",
+        "title": "Mad & Takeaway",
+        "summary": "Poser til takeaway, pizza, bagerier og street food — stærke, fødevaresikre, og brandede.",
+        "tags": "Fødevaresikker, Varmebestandig, Branding, Volumen"
+      },
+      "detail": {
+        "number": "03",
+        "title": "Detail- & Specialbutikker",
+        "summary": "Premium bæreposer til tøjmærker, specialforretninger og boutiques. Styrk din butiks identitet.",
+        "tags": "Premiumfinish, Farvetilpasning, Flere størrelser, Bæredygtig"
+      },
+      "events": {
+        "number": "04",
+        "title": "Events & Konferencer",
+        "summary": "Brandede tote bags til konferencer, festivaler, messer og giveaways. Store oplag, hurtig levering.",
+        "tags": "Store oplag, Hurtig levering, Fuld branding, Flere farver"
+      },
+      "corporate": {
+        "number": "05",
+        "title": "Corporate & Kampagne",
+        "summary": "Skræddersyede poser til virksomheder, hoteller og marketingkampagner — professionel branding på farten.",
+        "tags": "Virksomhedsbranding, Kampagne, Professionelt, Skalerbart"
+      }
+    }
+  },
+  "contact": {
+    "bannerTitle": "Fortæl os om dit behov",
+    "bannerSubtitle": "Uanset om du driver en lokal butik eller repræsenterer et større brand, står vi klar til at hjælpe.",
+    "formTitle": "Lad os finde den rigtige løsning",
+    "formDescription": "Når du investerer i emballage, skal det være ordentligt. Vi hjælper dig med løsninger, der styrker din forretning og holder i længden.",
+    "socialTitle": "Social media",
+    "emailTitle": "Email",
+    "emailAddress": "support@napack.dk",
+    "form": {
+      "name": "Navn",
+      "namePlaceholder": "Indtast dit navn...",
+      "email": "Email",
+      "emailPlaceholder": "Indtast din e-mail...",
+      "phone": "Telefonnummer",
+      "phonePlaceholder": "Indtast dit tlf. nummer...",
+      "subject": "Emne",
+      "subjectPlaceholder": "Vælg et emne...",
+      "subjectOptions": {
+        "quote": "Få et tilbud",
+        "custom": "Tilpasset emballage / poser med logo",
+        "materials": "Materialer & bæredygtighed",
+        "moq": "Minimumsbestilling & priser",
+        "production": "Produktion & levering",
+        "samples": "Prøver før produktion",
+        "other": "Andet / generelt spørgsmål"
+      },
+      "message": "Besked",
+      "messagePlaceholder": "Indtast din besked...",
+      "submit": "Send besked",
+      "sending": "Vent...",
+      "success": "Tak! Vi har modtaget din besked.",
+      "error": "Noget gik galt. Prøv venligst igen."
+    }
+  },
+  "footer": {
+    "tagline": "Building Tomorrow's Packaging, Today",
+    "searchPlaceholder": "Søg…",
+    "copyright": "© {year} - All rights reserved — Dev. Disrptv Digital"
+  },
+  "designEntry": {
+    "title": "Design din egen pose",
+    "subtitle": "Vælg den posetype der passer til dit brand — og tilpas den med dit logo, dine farver og din tekst.",
+    "tote": {
+      "title": "Tote Bags",
+      "description": "Trendy langhanks-poser til daglig brug. Perfekt til brands, events, pop-ups, merchandise og corporate branding.",
+      "cta": "Design Tote Bag"
+    },
+    "retail": {
+      "title": "Detail Poser",
+      "description": "Professionelle poser til takeaway, pizzasteder, tøjbutikker og dagligvarer. Vælg mellem flere varianter.",
+      "cta": "Design Detail Pose"
+    }
+  },
+  "configurator": {
+    "backToCategories": "Tilbage til kategorier",
+    "selectVariant": "Vælg posetype",
+    "selectCategory": "Vælg posekategori",
+    "selectSize": "Vælg størrelse",
+    "selectColor": "Vælg farve",
+    "uploadLogo": "Upload logo",
+    "uploadLogoDescription": "Upload dit logo eller grafik (PNG, JPG, SVG)",
+    "dragDrop": "Træk og slip din fil her, eller klik for at vælge",
+    "removeLogo": "Fjern logo",
+    "logoScale": "Logo størrelse",
+    "logoScaleDescription": "Skaler logoet, så det fylder mere eller mindre af trykfeltet.",
+    "removeWhiteBackground": "Fjern hvid baggrund",
+    "removeWhiteBackgroundDescription": "Et klik fjerner hvid baggrund fra JPG eller logoer uden gennemsigtighed.",
+    "addText": "Tilføj tekst",
+    "addTextPlaceholder": "f.eks. www.ditfirma.dk",
+    "addTextDescription": "Tilføj tekst under dit logo (f.eks. website URL)",
+    "sizeSmall": "Lille",
+    "sizeMedium": "Medium",
+    "sizeLarge": "Stor",
+    "preview": "Forhåndsvisning",
+    "downloadPreview": "Download forhåndsvisning",
+    "downloading": "Downloader...",
+    "submitDesign": "Indsend design",
+    "resetDesign": "Nulstil",
+    "viewerPlaceholder": "Interaktiv 3D",
+    "viewerPlaceholderSub": "Dit design vises direkte pa den valgte posemodel.",
+    "viewerReady": "Interaktiv 3D",
+    "viewerHint": "Træk for at rotere eller zoom ind",
+    "viewerModelMissing": "Modelvisning ikke tilgaengelig"
+  },
+  "inquiry": {
+    "title": "Indsend dit design",
+    "subtitle": "Udfyld dine kontaktoplysninger, så tager vores team kontakt med et tilbud og næste skridt.",
+    "name": "Navn",
+    "namePlaceholder": "Dit fulde navn",
+    "company": "Virksomhed",
+    "companyPlaceholder": "Din virksomhed",
+    "email": "E-mail",
+    "emailPlaceholder": "din@email.dk",
+    "phone": "Telefon (valgfri)",
+    "phonePlaceholder": "+45 12 34 56 78",
+    "notes": "Bemærkninger (valgfri)",
+    "notesPlaceholder": "Antal, særlige ønsker, spørgsmål...",
+    "submit": "Indsend forespørgsel",
+    "submitting": "Indsender...",
+    "required": "Påkrævet",
+    "invalidEmail": "Ugyldig e-mailadresse",
+    "success": {
+      "title": "Tak for din forespørgsel!",
+      "description": "Vores team gennemgår dit design og kontakter dig inden for 1-2 hverdage med et tilbud og næste skridt.",
+      "note": "Vi svarer på alle henvendelser personligt — ingen automatiserede svar.",
+      "backToDesign": "Design en ny pose",
+      "backToHome": "Gå til forsiden"
+    }
+  },
+  "products": {
+    "tote": {
+      "name": "Tote Bags",
+      "description": "Premium tote bags med lange hanke — perfekt til daglig brug, events og branding.",
+      "tagline": "Den ultimative brandede tote bag",
+      "variants": {
+        "classic": {
+          "name": "Klassisk Tote",
+          "description": "Tidløs langhanks-tote i premium kvalitet."
+        }
+      }
+    },
+    "retail": {
+      "name": "Detail Poser",
+      "description": "Professionelle bæreposer til detail, takeaway og dagligvarer.",
+      "tagline": "Professionel emballage til enhver butik",
+      "variants": {
+        "pizza": { "name": "Pizza Pose", "description": "Specialdesignet til pizzaer og andre varme fødevarer." },
+        "takeaway": { "name": "Takeaway Pose", "description": "Klassisk takeaway-pose med bund." },
+        "retail": { "name": "Retail Pose", "description": "En høj allround shoppingpose til dagligvarer, mode og almindelig retail." },
+        "grocery": { "name": "Dagligvare Pose", "description": "Robust pose med korte hanke til dagligvarer." }
+      }
+    }
+  },
+  "colors": {
+    "natural": "Natur",
+    "white": "Hvid",
+    "black": "Sort",
+    "forest": "Skovgrøn",
+    "navy": "Marineblå",
+    "burgundy": "Bordeaux",
+    "sand": "Sand",
+    "sage": "Salvie"
+  }
+}

@@ -1,0 +1,278 @@
+{
+  "metadata": {
+    "title": "Nordic Atlas Packaging | Sustainable Reusable Bags",
+    "description": "Custom reusable textile bags for retailers and brands. EU-approved production direct from the manufacturer.",
+    "aboutTitle": "About | Nordic Atlas Packaging",
+    "aboutDescription": "EU-compliant packaging — sustainable bags that boost your visibility.",
+    "solutionsTitle": "Solutions | Nordic Atlas Packaging",
+    "solutionsDescription": "Explore all the ways we help businesses grow.",
+    "contactTitle": "Contact | Nordic Atlas Packaging",
+    "contactDescription": "Tell us about your needs — we're ready to help.",
+    "designTitle": "Design Your Bag | Nordic Atlas Packaging",
+    "designDescription": "Choose your bag type and design your own branded packaging online.",
+    "configuratorToteTitle": "Tote Bag Configurator | Nordic Atlas Packaging",
+    "configuratorRetailTitle": "Retail Bag Configurator | Nordic Atlas Packaging"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "solutions": "Solutions",
+    "contact": "Contact",
+    "cta": "Book a meeting",
+    "designCTA": "Design Your Bag",
+    "language": "Language"
+  },
+  "home": {
+    "heroTag": "Empowering brands towards a sustainable future",
+    "heroTitle": "For Local & Global Retailers & Brands",
+    "heroDescription": "We design custom reusable fabric bags that replace single-use plastics and turn your customers into mobile brand exposure. Each bag acts as a sustainable, reusable billboard with your logo — in use again and again, long after the purchase.",
+    "aboutLink": "About us",
+    "aboutTitle": "Sustainable growth solutions for shops and brands",
+    "aboutDescription": "Our mission is to replace single-use packaging with reusable fabric bags that people actually want to use. We help brands stay visible in everyday life — on the street, at work, in the gym and in supermarkets — while reducing plastic waste and promoting responsible consumption.",
+    "counterBags": "Bags produced",
+    "counterBagsDescription": "We complete a growing number of projects every year!",
+    "counterSatisfaction": "Customer satisfaction",
+    "counterSatisfactionDescription": "We do our best to build lasting relationships. Your satisfaction is what matters most — every step of the way.",
+    "processTitle": "Our process",
+    "processSubtitle": "From idea to delivery — made simple",
+    "processCta": "See your options",
+    "step1Title": "Brand Analysis",
+    "step1Description": "We get to know your brand and target audience, and how bags will be used — in stores, at events, giveaways, or e-commerce.",
+    "step2Title": "Design & Mockups",
+    "step2Description": "Our team creates bag designs with your logo, colors, and message. You approve the final design before production.",
+    "step3Title": "Production & Quality Check",
+    "step3Description": "We produce your reusable bags with consistent printing, strong stitching, and durable materials.",
+    "step4Title": "Delivery & Brand Exposure",
+    "step4Description": "The bags are delivered to your address, ready to be given to your customers — so every bag becomes free advertising for your brand."
+  },
+  "about": {
+    "heroSubtitle": "Solutions for shops and brands — local and international",
+    "heroTitle": "Sustainable non-woven carrier bags",
+    "heroDescription": "A durable alternative to single-use plastics. For shops, takeaway, and retail. Direct from the manufacturer.",
+    "heroCta": "Get started",
+    "heroCounter": "Customers globally.",
+    "certTag": "Powering brands with clean bags",
+    "certDescription": "EU-approved packaging — sustainable bags that boost your visibility. We deliver high quality and a scalable supply chain. Together we create reusable solutions that build your brand — and make it visible across Europe.",
+    "certBadge": "EU-compliant packaging.",
+    "solutionTitle": "Future-proof packaging for your business",
+    "solutionSubtitle": "Nordic Atlas Packaging custom packaging — on your terms",
+    "solutionCta": "Find your solution",
+    "solution1Title": "Clean and sustainable production",
+    "solution1Description": "EU-approved production direct from the manufacturer. Consistent quality and scalable solutions.",
+    "solution2Title": "Climate-conscious choices",
+    "solution2Description": "We prioritize cleaner materials and responsible sourcing. Packaging that meets modern sustainability requirements — without compromising on function.",
+    "solution3Title": "Direct delivery. Reliable support",
+    "solution3Description": "Clear timelines, fast delivery, and direct contact — from first dialogue to finished product.",
+    "portfolioTitle": "Tailored Packaging Solutions",
+    "portfolio1Title": "Food & Groceries",
+    "portfolio1Description": "Durable, reusable bags designed for restaurants, grocery chains, and food delivery services.",
+    "portfolio2Title": "Shops & Merchandise",
+    "portfolio2Description": "Reusable premium bags for clothing brands, shops, bookstores, and events.",
+    "portfolio3Title": "Corporate & Campaign",
+    "portfolio3Description": "Clean, branded bags for conferences, hotels, trade shows, product launches, and marketing campaigns.",
+    "portfolio4Title": "Sustainable Custom Branding",
+    "portfolio4Description": "Sustainability from the source. Renewable energy, skilled craftsmanship, and better bags.",
+    "whyChooseTag": "Why choose us",
+    "whyChooseTitle": "Creating a more sustainable Scandinavia is at the core of Nordic Atlas' mission",
+    "whyChooseCounter": "From small shops to large retail chains — businesses like yours choose us.",
+    "whyChooseCta": "Contact us",
+    "processLeftTitle": "Efficient preparation for quality",
+    "processRightTitle": "Consistently uniform production",
+    "process1Title": "Pre-production",
+    "process1Description": "We finalize design, branding, graphic placement, materials, sizes, and print method. Once approved, the order goes into production with a fixed timeline.",
+    "process2Title": "Production",
+    "process2Description": "Your bags go into production. We produce samples for approval first, before full production continues. Every step is quality checked.",
+    "process3Title": "Shipping",
+    "process3Description": "When production is complete, the order is securely packed and shipped directly to your delivery address. Tracking and all export documents are included.",
+    "faqTitle": "Frequently asked questions",
+    "faq1Question": "What materials are your bags made of?",
+    "faq1Answer": "We use non-woven polypropylene (PP), cotton blends, and other reusable materials — depending on your needs. All materials are EU-approved, durable, and fully customizable.",
+    "faq2Question": "Can I get bags with my own logo and design?",
+    "faq2Answer": "Yes. We offer full customization including logo, colors, graphics, print finish, and sizes. Our design team helps with mockups so your look is consistent across all orders.",
+    "faq3Question": "What is the minimum order quantity?",
+    "faq3Answer": "Our standard minimum order is typically 3,000–5,000 units, depending on the model and level of customization. Larger quantities mean lower unit prices.",
+    "faq4Question": "How long is the production and delivery time?",
+    "faq4Answer": "Production typically takes 10–18 days, followed by 7–14 days of delivery, depending on destination and shipping method. You always get a clear timeline upfront.",
+    "faq5Question": "Do you offer samples before mass production?",
+    "faq5Answer": "Yes. We offer both digital samples and physical pre-production samples by arrangement, so you can approve materials, print, and sizes before production begins."
+  },
+  "solutions": {
+    "bannerTitle": "Our solutions",
+    "bannerSubtitle": "Explore all the ways we help businesses grow — from idea and design to finished solution and beyond.",
+    "services": {
+      "dagligvarer": {
+        "number": "01",
+        "title": "Groceries",
+        "summary": "Durable, reusable carrier bags for supermarkets and discount chains — ready with your logo, in large quantities.",
+        "tags": "Non-woven, Large orders, Logo print, EU-approved"
+      },
+      "mad": {
+        "number": "02",
+        "title": "Food & Takeaway",
+        "summary": "Bags for takeaway, pizza, bakeries, and street food — strong, food-safe, and branded.",
+        "tags": "Food-safe, Heat resistant, Branding, Volume"
+      },
+      "detail": {
+        "number": "03",
+        "title": "Retail & Specialty Shops",
+        "summary": "Premium carrier bags for clothing brands, specialty shops, and boutiques. Strengthen your store identity.",
+        "tags": "Premium finish, Color matching, Multiple sizes, Sustainable"
+      },
+      "events": {
+        "number": "04",
+        "title": "Events & Conferences",
+        "summary": "Branded tote bags for conferences, festivals, trade shows, and giveaways. Large volumes, fast delivery.",
+        "tags": "Large volumes, Fast delivery, Full branding, Multiple colors"
+      },
+      "corporate": {
+        "number": "05",
+        "title": "Corporate & Campaign",
+        "summary": "Custom bags for businesses, hotels, and marketing campaigns — professional branding on the go.",
+        "tags": "Corporate branding, Campaign, Professional, Scalable"
+      }
+    }
+  },
+  "contact": {
+    "bannerTitle": "Tell us about your needs",
+    "bannerSubtitle": "Whether you run a local shop or represent a larger brand, we're ready to help.",
+    "formTitle": "Let's find the right solution",
+    "formDescription": "When you invest in packaging, it should be done right. We help you with solutions that strengthen your business and last.",
+    "socialTitle": "Social media",
+    "emailTitle": "Email",
+    "emailAddress": "support@napack.dk",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Enter your name...",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email...",
+      "phone": "Phone Number",
+      "phonePlaceholder": "Enter your phone number...",
+      "subject": "Subject",
+      "subjectPlaceholder": "Select a subject...",
+      "subjectOptions": {
+        "quote": "Get a quote",
+        "custom": "Custom packaging / bags with logo",
+        "materials": "Materials & sustainability",
+        "moq": "Minimum order & pricing",
+        "production": "Production & delivery",
+        "samples": "Samples before production",
+        "other": "Other / general question"
+      },
+      "message": "Message",
+      "messagePlaceholder": "Enter your message...",
+      "submit": "Send message",
+      "sending": "Please wait...",
+      "success": "Thank you! We've received your message.",
+      "error": "Something went wrong. Please try again."
+    }
+  },
+  "footer": {
+    "tagline": "Building Tomorrow's Packaging, Today",
+    "searchPlaceholder": "Search…",
+    "copyright": "© {year} - All rights reserved — Dev. Disrptv Digital"
+  },
+  "designEntry": {
+    "title": "Design your own bag",
+    "subtitle": "Choose the bag type that fits your brand — and customize it with your logo, colors, and text.",
+    "tote": {
+      "title": "Tote Bags",
+      "description": "Trendy long-handle tote bags for everyday use. Perfect for brands, events, pop-ups, merchandise, and corporate branding.",
+      "cta": "Design Tote Bag"
+    },
+    "retail": {
+      "title": "Retail Bags",
+      "description": "Professional bags for takeaway, pizza places, clothing shops, and groceries. Choose from multiple variants.",
+      "cta": "Design Retail Bag"
+    }
+  },
+  "configurator": {
+    "backToCategories": "Back to categories",
+    "selectVariant": "Select bag type",
+    "selectCategory": "Select bag category",
+    "selectSize": "Select size",
+    "selectColor": "Select color",
+    "uploadLogo": "Upload logo",
+    "uploadLogoDescription": "Upload your logo or graphic (PNG, JPG, SVG)",
+    "dragDrop": "Drag and drop your file here, or click to select",
+    "removeLogo": "Remove logo",
+    "logoScale": "Logo size",
+    "logoScaleDescription": "Scale the artwork so it fills more or less of the print area.",
+    "removeWhiteBackground": "Remove white background",
+    "removeWhiteBackgroundDescription": "One click cleanup for JPG or non-transparent logos placed on the bag.",
+    "addText": "Add text",
+    "addTextPlaceholder": "e.g. www.yourcompany.com",
+    "addTextDescription": "Add text below your logo (e.g. website URL)",
+    "sizeSmall": "Small",
+    "sizeMedium": "Medium",
+    "sizeLarge": "Large",
+    "preview": "Preview",
+    "downloadPreview": "Download preview",
+    "downloading": "Downloading...",
+    "submitDesign": "Submit design",
+    "resetDesign": "Reset",
+    "viewerPlaceholder": "Interactive 3D",
+    "viewerPlaceholderSub": "Your design is rendered directly on the selected bag model.",
+    "viewerReady": "Interactive 3D",
+    "viewerHint": "Drag to rotate or scroll to zoom",
+    "viewerModelMissing": "Model preview unavailable"
+  },
+  "inquiry": {
+    "title": "Submit your design",
+    "subtitle": "Fill in your contact details and our team will reach out with a quote and next steps.",
+    "name": "Name",
+    "namePlaceholder": "Your full name",
+    "company": "Company",
+    "companyPlaceholder": "Your company",
+    "email": "Email",
+    "emailPlaceholder": "you@company.com",
+    "phone": "Phone (optional)",
+    "phonePlaceholder": "+45 12 34 56 78",
+    "notes": "Notes (optional)",
+    "notesPlaceholder": "Quantity, special requests, questions...",
+    "submit": "Submit inquiry",
+    "submitting": "Submitting...",
+    "required": "Required",
+    "invalidEmail": "Invalid email address",
+    "success": {
+      "title": "Thank you for your inquiry!",
+      "description": "Our team will review your design and contact you within 1-2 business days with a quote and next steps.",
+      "note": "We respond to all inquiries personally — no automated replies.",
+      "backToDesign": "Design another bag",
+      "backToHome": "Go to homepage"
+    }
+  },
+  "products": {
+    "tote": {
+      "name": "Tote Bags",
+      "description": "Premium tote bags with long handles — perfect for everyday use, events, and branding.",
+      "tagline": "The ultimate branded tote bag",
+      "variants": {
+        "classic": {
+          "name": "Classic Tote",
+          "description": "Timeless long-handle tote in premium quality."
+        }
+      }
+    },
+    "retail": {
+      "name": "Retail Bags",
+      "description": "Professional carrier bags for retail, takeaway, and groceries.",
+      "tagline": "Professional packaging for every store",
+      "variants": {
+        "pizza": { "name": "Pizza Bag", "description": "Specially designed for pizzas and other hot foods." },
+        "takeaway": { "name": "Takeaway Bag", "description": "Classic takeaway bag with a flat bottom." },
+        "retail": { "name": "Retail Bag", "description": "A tall all-purpose shopping bag for grocery, fashion, and everyday retail." },
+        "grocery": { "name": "Grocery Bag", "description": "Sturdy bag with short handles for groceries." }
+      }
+    }
+  },
+  "colors": {
+    "natural": "Natural",
+    "white": "White",
+    "black": "Black",
+    "forest": "Forest Green",
+    "navy": "Navy",
+    "burgundy": "Burgundy",
+    "sand": "Sand",
+    "sage": "Sage"
+  }
+}

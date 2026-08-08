@@ -4,7 +4,7 @@ import type { Profile, UserRole } from '@/types/db';
 import { MODULE_ACCESS } from '@/types/db';
 
 /** Fetch the signed-in user's profile (server-side). Redirects to /login if unauthenticated. */
-export async function requireProfile(): Promise<Profile> {
+export async function requireProfile(): Promise<Profile & { email: string }> {
   const supabase = await createClient();
   const {
     data: { user },
@@ -13,7 +13,7 @@ export async function requireProfile(): Promise<Profile> {
 
   const { data: profile } = await supabase.from('profiles').select('*').eq('id', user.id).single();
   if (!profile) redirect('/login');
-  return profile as Profile;
+  return { ...(profile as Profile), email: user.email ?? '' };
 }
 
 /** Server-side module gate. RLS is the real enforcement; this prevents rendering. */

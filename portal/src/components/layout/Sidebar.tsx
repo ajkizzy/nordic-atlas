@@ -15,7 +15,14 @@ const NAV = [
   { href: '/dashboard/inventory', label: 'Sales & Inventory', icon: Boxes, module: 'inventory' as const },
 ];
 
-export function Sidebar({ role, name, signOutAction }: { role: UserRole; name: string; signOutAction: () => void }) {
+export function Sidebar({
+  role, name, email, signOutAction,
+}: {
+  role: UserRole;
+  name: string;
+  email: string;
+  signOutAction: () => void;
+}) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const access = MODULE_ACCESS[role];
@@ -46,8 +53,8 @@ export function Sidebar({ role, name, signOutAction }: { role: UserRole; name: s
   const footer = (
     <div className="mt-auto border-t border-slate-100 p-3">
       <div className="px-3 py-2">
-        <p className="text-sm font-semibold text-slate-900 truncate">{name || 'User'}</p>
-        <p className="text-xs text-slate-500">{{ owner: 'Owner', sales: 'Sales Rep', warehouse: 'Warehouse' }[role]}</p>
+        <p className="truncate text-sm font-semibold text-slate-900">{name || 'Add your name'}</p>
+        <p className="truncate text-xs text-slate-500">{email}</p>
       </div>
       <form action={signOutAction}>
         <button className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm text-slate-600 hover:bg-slate-100">

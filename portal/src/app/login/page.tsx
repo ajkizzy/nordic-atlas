@@ -1,10 +1,10 @@
 'use client';
 
 import { useActionState } from 'react';
+import Image from 'next/image';
 import { signIn } from './actions';
 import { Button } from '@/components/ui/Button';
 import { Input, Label } from '@/components/ui/Input';
-import { Package } from 'lucide-react';
 
 export default function LoginPage() {
   const [state, action, pending] = useActionState(signIn, null);
@@ -13,9 +13,7 @@ export default function LoginPage() {
     <main className="min-h-dvh flex items-center justify-center p-4">
       <div className="w-full max-w-sm bg-white border border-slate-200 rounded-2xl shadow-sm p-8">
         <div className="flex items-center gap-2 mb-6">
-          <span className="h-10 w-10 rounded-lg bg-brand-700 text-white flex items-center justify-center">
-            <Package size={20} />
-          </span>
+          <Image src="/nordic-atlas-logo.png" alt="Nordic Atlas" width={40} height={40} className="h-10 w-10" priority />
           <div>
             <h1 className="text-lg leading-tight">Nordic Atlas</h1>
             <p className="text-xs text-slate-500">Internal Portal</p>

@@ -10,14 +10,14 @@ export default function LoginPage() {
   const [state, action, pending] = useActionState(signIn, null);
 
   return (
-    <main className="relative isolate flex min-h-dvh items-center justify-center overflow-hidden bg-black p-4">
+    <main className="relative isolate flex min-h-dvh items-center justify-center overflow-hidden bg-slate-50 p-4 sm:bg-black">
       <Image
-        src="/login-background.png"
+        src="/login-banner.png"
         alt=""
         fill
         priority
         sizes="100vw"
-        className="-z-10 object-cover object-center"
+        className="-z-10 hidden object-cover object-center sm:block"
       />
       <div className="w-full max-w-sm rounded-lg border border-white/30 bg-white p-8 shadow-2xl">
         <div className="flex items-center gap-2 mb-6">

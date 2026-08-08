@@ -46,7 +46,7 @@ export default function ResetPasswordPage() {
     <main className="flex min-h-dvh items-center justify-center bg-white p-4">
       <div className="w-full max-w-sm rounded-lg border border-slate-200 bg-white p-8 shadow-xl">
         <div className="mb-7 text-center">
-          <Image src="/naportal-icon.png" alt="NAPortal" width={64} height={64} className="mx-auto h-16 w-16" priority />
+          <Image src="/naportal-icon-256.png" alt="NAPortal" width={64} height={64} className="mx-auto h-16 w-16" priority />
           <p className="mt-2 text-sm font-semibold text-brand-800">NAPortal</p>
           <h1 className="mt-4 text-2xl font-semibold text-slate-950">Choose a new password</h1>
         </div>

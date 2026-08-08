@@ -13,8 +13,8 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <main className="flex min-h-dvh items-center justify-center overflow-hidden bg-white p-4 sm:p-8">
-      <section className="relative flex w-full max-w-sm items-center justify-center sm:aspect-[1983/793] sm:w-[min(92vw,calc((100dvh-4rem)*2.5006))] sm:max-w-[1280px] sm:justify-start sm:overflow-hidden sm:rounded-lg sm:border sm:border-slate-200 sm:shadow-xl">
+    <main className="flex min-h-dvh items-center justify-center bg-white p-4 sm:p-8">
+      <section className="relative flex w-full max-w-sm items-center justify-center sm:h-[min(640px,calc(100dvh-4rem))] sm:min-h-[580px] sm:w-[min(92vw,1280px)] sm:max-w-[1280px] sm:justify-start sm:overflow-hidden sm:rounded-lg sm:border sm:border-slate-200 sm:shadow-xl">
         <Image
           src="/login-banner.png"
           alt=""
@@ -24,14 +24,14 @@ export default function LoginPage() {
           className="hidden object-cover object-center sm:block"
         />
 
-        <div className="relative z-10 w-full rounded-lg border border-slate-200 bg-white p-7 shadow-xl sm:ml-[5%] sm:w-[360px] sm:border-white/70 sm:bg-white/55 sm:p-8 sm:shadow-2xl sm:backdrop-blur-2xl">
+        <div className="relative z-10 w-full rounded-lg border border-slate-200 bg-white p-7 shadow-xl sm:ml-[4%] sm:w-[390px] sm:border-white/70 sm:bg-white/55 sm:p-9 sm:shadow-2xl sm:backdrop-blur-2xl">
           <div className="mb-7 text-center">
             <Image
-              src="/naportal-icon.png"
+              src="/naportal-icon-256.png"
               alt="NAPortal"
-              width={72}
-              height={72}
-              className="mx-auto h-[72px] w-[72px]"
+              width={84}
+              height={84}
+              className="mx-auto h-[84px] w-[84px]"
               priority
             />
             <p className="mt-2 text-sm font-semibold text-brand-800">NAPortal</p>

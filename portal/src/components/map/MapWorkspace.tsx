@@ -4,16 +4,15 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { createClient } from '@/lib/supabase/client';
 import type { BagPotential, Cuisine, Lead, LeadCategory, LeadStatus } from '@/types/db';
-import { BAG_POTENTIAL_META, CATEGORY_LABELS, STATUS_COLORS } from '@/types/db';
+import { CATEGORY_LABELS, STATUS_COLORS } from '@/types/db';
 import { CUISINE_META, CUISINE_ORDER } from '@/lib/cuisine';
 import { CuisineIcon } from './CuisineIcon';
 import { MapLegend } from './MapLegend';
 import { Button } from '@/components/ui/Button';
 import { Input, Label, Select, Textarea } from '@/components/ui/Input';
-import { Badge } from '@/components/ui/Badge';
 import { Card } from '@/components/ui/Card';
 import { cn } from '@/lib/utils';
-import { AlertTriangle, List, Map as MapIcon, Plus, RotateCcw, Search, Trash2, X } from 'lucide-react';
+import { AlertTriangle, Check, ChevronDown, List, Map as MapIcon, Plus, RotateCcw, Search, Trash2, X } from 'lucide-react';
 
 // Leaflet touches `window` — must skip SSR.
 const LeadMap = dynamic(() => import('./LeadMap'), {
@@ -39,6 +38,7 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
   const [selected, setSelected] = useState<Lead | null>(null);
   const [draft, setDraft] = useState<Draft | null>(null);
   const [saving, setSaving] = useState(false);
+  const [statusSavingId, setStatusSavingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [deleteCandidate, setDeleteCandidate] = useState<Lead | null>(null);
   const [recentlyDeleted, setRecentlyDeleted] = useState<Lead | null>(null);
@@ -134,6 +134,33 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
       }
     }
     setSaving(false);
+  }
+
+  async function updateLeadStatus(lead: Lead, status: LeadStatus) {
+    if (lead.status === status || statusSavingId === lead.id) return;
+    const previousStatus = lead.status;
+    setStatusSavingId(lead.id);
+    setError(null);
+    setLeads((current) => current.map((item) => item.id === lead.id ? { ...item, status } : item));
+    setSelected((current) => current?.id === lead.id ? { ...current, status } : current);
+
+    const { data, error } = await supabase
+      .from('leads')
+      .update({ status })
+      .eq('id', lead.id)
+      .select()
+      .single();
+
+    if (error) {
+      setLeads((current) => current.map((item) => item.id === lead.id ? { ...item, status: previousStatus } : item));
+      setSelected((current) => current?.id === lead.id ? { ...current, status: previousStatus } : current);
+      setError(`Could not update ${lead.name}: ${error.message}`);
+    } else {
+      const updated = data as Lead;
+      setLeads((current) => current.map((item) => item.id === lead.id ? updated : item));
+      setSelected((current) => current?.id === lead.id ? updated : current);
+    }
+    setStatusSavingId(null);
   }
 
   async function confirmDeleteLead() {
@@ -312,7 +339,7 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
                     <th className="px-4 py-3">Name</th>
                     <th className="px-4 py-3">Cuisine</th>
                     <th className="px-4 py-3">City</th>
-                    <th className="px-4 py-3">Bags</th>
+                    <th className="px-4 py-3">Phone</th>
                     <th className="px-4 py-3">Status</th>
                   </tr>
                 </thead>
@@ -331,13 +358,25 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
                         </span>
                       </td>
                       <td className="px-4 py-2.5">{l.city ?? '—'}</td>
-                      <td className="px-4 py-2.5">
-                        <Badge color={BAG_POTENTIAL_META[l.bag_potential].color}>
-                          {BAG_POTENTIAL_META[l.bag_potential].label}
-                        </Badge>
+                      <td className="px-4 py-2.5 whitespace-nowrap">
+                        {l.phone ? (
+                          <a
+                            href={`tel:${l.phone.replace(/[^+\d]/g, '')}`}
+                            onClick={(event) => event.stopPropagation()}
+                            className="font-medium text-brand-700 hover:underline"
+                          >
+                            {l.phone}
+                          </a>
+                        ) : (
+                          <span className="text-slate-400">No phone</span>
+                        )}
                       </td>
-                      <td className="px-4 py-2.5">
-                        <Badge color={l.color || STATUS_COLORS[l.status]}>{l.status}</Badge>
+                      <td className="px-4 py-2.5" onClick={(event) => event.stopPropagation()}>
+                        <InlineStatusPicker
+                          lead={l}
+                          disabled={statusSavingId === l.id}
+                          onChange={(status) => updateLeadStatus(l, status)}
+                        />
                       </td>
                     </tr>
                   ))}
@@ -459,9 +498,16 @@ function LeadEditor({
 
   return (
     <div className="p-5 space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="sticky top-0 z-20 -mx-5 -mt-5 flex items-center justify-between border-b border-slate-100 bg-white px-5 py-4">
         <h3 className="text-base">{isNew ? 'New lead' : 'Edit lead'}</h3>
-        <button onClick={onClose} className="text-slate-400 hover:text-slate-700" aria-label="Close"><X size={18} /></button>
+        <button
+          onClick={onClose}
+          className="grid h-9 w-9 place-items-center rounded-md text-slate-400 hover:bg-slate-100 hover:text-slate-700"
+          aria-label="Close"
+          title="Close"
+        >
+          <X size={18} />
+        </button>
       </div>
       <p className="text-xs text-slate-400">
         {lead.lat.toFixed(4)}, {lead.lng.toFixed(4)}
@@ -570,6 +616,70 @@ function LeadEditor({
           <Button variant="danger" onClick={onDelete}><Trash2 size={15} /> Delete</Button>
         )}
       </div>
+    </div>
+  );
+}
+
+function InlineStatusPicker({
+  lead, disabled, onChange,
+}: {
+  lead: Lead;
+  disabled: boolean;
+  onChange: (status: LeadStatus) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const closeOnOutsideClick = (event: MouseEvent) => {
+      if (!containerRef.current?.contains(event.target as Node)) setOpen(false);
+    };
+    document.addEventListener('mousedown', closeOnOutsideClick);
+    return () => document.removeEventListener('mousedown', closeOnOutsideClick);
+  }, [open]);
+
+  return (
+    <div ref={containerRef} className="relative inline-block">
+      <button
+        type="button"
+        disabled={disabled}
+        onClick={() => setOpen((current) => !current)}
+        className="inline-flex h-8 min-w-32 items-center gap-2 rounded-md border border-slate-200 bg-white px-2.5 text-xs font-semibold capitalize text-slate-700 hover:border-slate-300 hover:bg-slate-50 disabled:opacity-60"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-label={`Change status for ${lead.name}. Current status: ${lead.status}`}
+      >
+        <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: STATUS_COLORS[lead.status] }} />
+        <span className="flex-1 text-left">{lead.status}</span>
+        <ChevronDown size={14} className="text-slate-400" />
+      </button>
+
+      {open && (
+        <div
+          role="listbox"
+          aria-label={`Status for ${lead.name}`}
+          className="absolute right-0 z-30 mt-1 w-40 overflow-hidden rounded-md border border-slate-200 bg-white py-1 shadow-lg"
+        >
+          {ALL_STATUSES.map((status) => (
+            <button
+              key={status}
+              type="button"
+              role="option"
+              aria-selected={lead.status === status}
+              onClick={() => {
+                setOpen(false);
+                onChange(status);
+              }}
+              className="flex h-9 w-full items-center gap-2 px-3 text-left text-sm capitalize text-slate-700 hover:bg-slate-50"
+            >
+              <span className="h-3 w-3 shrink-0 rounded-full" style={{ backgroundColor: STATUS_COLORS[status] }} />
+              <span className="flex-1">{status}</span>
+              {lead.status === status && <Check size={14} className="text-brand-700" />}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

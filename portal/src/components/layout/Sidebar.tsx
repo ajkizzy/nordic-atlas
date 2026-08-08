@@ -1,10 +1,11 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { MODULE_ACCESS, type UserRole } from '@/types/db';
-import { LayoutDashboard, Map, Users, Boxes, Package, LogOut, Menu, X } from 'lucide-react';
+import { LayoutDashboard, Map, Users, Boxes, LogOut, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 const NAV = [
@@ -61,9 +62,7 @@ export function Sidebar({ role, name, signOutAction }: { role: UserRole; name: s
       {/* Mobile top bar */}
       <header className="md:hidden sticky top-0 z-40 flex items-center justify-between bg-white border-b border-slate-200 px-4 h-14">
         <div className="flex items-center gap-2">
-          <span className="h-8 w-8 rounded-md bg-brand-700 text-white flex items-center justify-center">
-            <Package size={16} />
-          </span>
+          <Image src="/nordic-atlas-logo.png" alt="Nordic Atlas" width={32} height={32} className="h-8 w-8" priority />
           <span className="font-heading font-medium text-slate-900">Nordic Atlas</span>
         </div>
         <button onClick={() => setOpen(!open)} className="p-2 text-slate-600" aria-label="Toggle menu">
@@ -80,9 +79,7 @@ export function Sidebar({ role, name, signOutAction }: { role: UserRole; name: s
       {/* Desktop sidebar */}
       <aside className="hidden md:flex w-60 shrink-0 flex-col bg-white border-r border-slate-200 min-h-dvh sticky top-0">
         <div className="flex items-center gap-2 px-5 h-16 border-b border-slate-100">
-          <span className="h-8 w-8 rounded-md bg-brand-700 text-white flex items-center justify-center">
-            <Package size={16} />
-          </span>
+          <Image src="/nordic-atlas-logo.png" alt="Nordic Atlas" width={32} height={32} className="h-8 w-8" priority />
           <div className="leading-tight">
             <p className="font-heading font-medium text-slate-900">Nordic Atlas</p>
             <p className="text-[11px] text-slate-400">Internal Portal</p>

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { MODULE_ACCESS, type UserRole } from '@/types/db';
-import { LayoutDashboard, Map, Users, Boxes, LogOut, Menu, X } from 'lucide-react';
+import { LayoutDashboard, Map, Users, Boxes, CircleUserRound, LogOut, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 const NAV = [
@@ -13,6 +13,7 @@ const NAV = [
   { href: '/dashboard/map', label: 'Map CRM', icon: Map, module: 'crm' as const },
   { href: '/dashboard/clients', label: 'Clients', icon: Users, module: 'crm' as const },
   { href: '/dashboard/inventory', label: 'Sales & Inventory', icon: Boxes, module: 'inventory' as const },
+  { href: '/dashboard/profile', label: 'Profile', icon: CircleUserRound, module: null },
 ];
 
 export function Sidebar({

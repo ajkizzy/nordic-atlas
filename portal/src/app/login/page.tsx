@@ -10,14 +10,19 @@ export default function LoginPage() {
   const [state, action, pending] = useActionState(signIn, null);
 
   return (
-    <main className="min-h-dvh flex items-center justify-center p-4">
-      <div className="w-full max-w-sm bg-white border border-slate-200 rounded-2xl shadow-sm p-8">
+    <main className="relative isolate flex min-h-dvh items-center justify-center overflow-hidden bg-black p-4">
+      <Image
+        src="/login-background.png"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="-z-10 object-cover object-center"
+      />
+      <div className="w-full max-w-sm rounded-lg border border-white/30 bg-white p-8 shadow-2xl">
         <div className="flex items-center gap-2 mb-6">
           <Image src="/nordic-atlas-logo.png" alt="Nordic Atlas" width={40} height={40} className="h-10 w-10" priority />
-          <div>
-            <h1 className="text-lg leading-tight">Nordic Atlas</h1>
-            <p className="text-xs text-slate-500">Internal Portal</p>
-          </div>
+          <h1 className="text-lg leading-tight">NAPortal</h1>
         </div>
 
         <form action={action} className="space-y-4">

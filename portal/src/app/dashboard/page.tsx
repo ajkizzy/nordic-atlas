@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 import { Card } from '@/components/ui/Card';
 import { TrendingUp, Users, Map, Boxes, AlertTriangle } from 'lucide-react';
 import { MODULE_ACCESS } from '@/types/db';
+import { BagSalesTicker } from '@/components/dashboard/BagSalesTicker';
 
 const dkk = new Intl.NumberFormat('da-DK', { style: 'currency', currency: 'DKK', maximumFractionDigits: 0 });
 
@@ -34,7 +35,7 @@ export default async function DashboardPage() {
     canCrm ? supabase.from('leads').select('id, status', { count: 'exact' }) : Promise.resolve(null),
     canCrm ? supabase.from('clients').select('id', { count: 'exact', head: true }) : Promise.resolve(null),
     canInventory ? supabase.from('inventory_items').select('id, stock_qty, low_stock_threshold') : Promise.resolve(null),
-    canViewRevenue ? supabase.from('sales').select('total, sold_at') : Promise.resolve(null),
+    canViewRevenue ? supabase.from('sales').select('qty, total, sold_at') : Promise.resolve(null),
   ]);
 
   const wonLeads = leadsRes?.data?.filter((l) => l.status === 'won').length ?? 0;
@@ -43,9 +44,11 @@ export default async function DashboardPage() {
   // Financial metrics — computed only when the Owner's session fetched rows.
   let revenue30d = 0;
   let revenueTotal = 0;
+  let bagsSold = 0;
   if (canViewRevenue && salesRes?.data) {
     const cutoff = Date.now() - 30 * 24 * 3600 * 1000;
     for (const s of salesRes.data) {
+      bagsSold += Number(s.qty);
       revenueTotal += Number(s.total);
       if (new Date(s.sold_at).getTime() >= cutoff) revenue30d += Number(s.total);
     }
@@ -57,6 +60,8 @@ export default async function DashboardPage() {
       <p className="text-sm text-slate-500 mb-6">
         Welcome back{profile.full_name ? `, ${profile.full_name.split(' ')[0]}` : ''}.
       </p>
+
+      {canViewRevenue && <BagSalesTicker total={bagsSold} />}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {canCrm && (

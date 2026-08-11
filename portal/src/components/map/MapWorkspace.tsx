@@ -26,10 +26,10 @@ const SWATCHES = ['', '#e11d48', '#f59e0b', '#3b82f6', '#8b5cf6', '#14b8a6', '#2
 
 type Draft = Partial<Lead> & { lat: number; lng: number };
 
-const DESKTOP_LIST = '(min-width: 768px)'; // Tailwind `md`
+const DESKTOP_LIST = '(min-width: 1024px)'; // Tailwind `lg`
 
 /**
- * Picks the list variant in JS rather than with `md:hidden` / `hidden md:table`.
+ * Picks the list variant in JS rather than with `lg:hidden` / `hidden lg:table`.
  * CSS only *hides* the losing variant — React still mounts it and the browser
  * still builds its DOM. At 1000+ leads that doubles the node count and the
  * mount cost of one `InlineStatusPicker` per row, which took list rendering
@@ -60,8 +60,8 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
   const [bagFilter, setBagFilter] = useState<BagPotential | 'all'>('all');
   const [selected, setSelected] = useState<Lead | null>(null);
   const [draft, setDraft] = useState<Draft | null>(null);
-  // Phones only: 5 category pills + 14 cuisine pills + 2 selects is ~340px of
-  // chrome, so the filters live behind a toggle. md+ always shows them.
+  // Below lg: 5 category pills + 14 cuisine pills + 2 selects is ~340px of
+  // chrome, so the filters live behind a toggle. lg+ always shows them.
   const [filtersOpen, setFiltersOpen] = useState(false);
   const desktopList = useDesktopList();
   const [saving, setSaving] = useState(false);
@@ -240,7 +240,7 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
     // Phones let the page scroll and give the map/list pane a height of its own.
     // Locking the whole workspace to the viewport made every toolbar row a
     // subtraction from the pane, which collapsed it to nothing.
-    <div className="flex flex-col gap-3 md:h-[calc(100dvh-7rem)] md:gap-4">
+    <div className="flex flex-col gap-3 lg:h-[calc(100dvh-7rem)] lg:gap-4">
       {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-2">
         <div className="flex rounded-md border border-slate-200 overflow-hidden">
@@ -264,7 +264,7 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
           onClick={() => setFiltersOpen((open) => !open)}
           aria-expanded={filtersOpen}
           className={cn(
-            'md:hidden inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-semibold',
+            'lg:hidden inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-semibold',
             filtersOpen || activeFilterCount > 0
               ? 'border-brand-300 bg-brand-50 text-brand-800'
               : 'border-slate-200 bg-white text-slate-600'
@@ -279,7 +279,7 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
           )}
         </button>
 
-        <div className="relative order-last w-full md:order-none md:ml-auto md:w-56 lg:w-64">
+        <div className="relative order-last w-full lg:order-none lg:ml-auto lg:w-64">
           <Search size={15} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
           <Input
             type="search"
@@ -311,7 +311,7 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
       </div>
 
       {/* Filters — drawer on phones, always-on rows from md up */}
-      <div className={cn('flex-col gap-2 md:flex', filtersOpen ? 'flex' : 'hidden')}>
+      <div className={cn('flex-col gap-2 lg:flex', filtersOpen ? 'flex' : 'hidden')}>
         <div className="flex flex-wrap items-center gap-1.5">
           {ALL_CATEGORIES.map((cat) => (
             <button
@@ -331,7 +331,7 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
           <Select
             value={bagFilter}
             onChange={(e) => setBagFilter(e.target.value as BagPotential | 'all')}
-            className="h-9 w-auto py-1 md:ml-2"
+            className="h-9 w-auto py-1 lg:ml-2"
           >
             <option value="all">All bag potential</option>
             <option value="high">High bag use</option>
@@ -382,12 +382,12 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
 
       {/* Definite height on phones; fills the locked column from md up. The
           min-height on both sides is what stops the pane collapsing again. */}
-      <div className="flex h-[65dvh] min-h-[22rem] gap-4 md:h-auto md:min-h-[20rem] md:flex-1">
+      <div className="flex h-[65dvh] min-h-[22rem] gap-4 lg:h-auto lg:min-h-[20rem] lg:flex-1">
         {/* Map or list */}
         <div className="flex-1 min-w-0">
           {view === 'map' ? (
             <Card className="h-full overflow-hidden relative">
-              <div className="absolute right-3 bottom-6 z-[500] max-w-[15rem] hidden md:block">
+              <div className="absolute right-3 bottom-6 z-[500] max-w-[15rem] hidden lg:block">
                 <MapLegend />
               </div>
               <LeadMap

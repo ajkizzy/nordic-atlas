@@ -1,7 +1,7 @@
 'use client';
 
-import { useMemo } from 'react';
-import { MapContainer, TileLayer, Marker, Tooltip, useMapEvents } from 'react-leaflet';
+import { useEffect, useMemo } from 'react';
+import { MapContainer, TileLayer, Marker, Tooltip, useMap, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { Lead } from '@/types/db';
@@ -40,6 +40,31 @@ function pinIcon(lead: Lead, selected: boolean) {
   });
 }
 
+/**
+ * Leaflet caches the container size at init and never re-measures on its own.
+ * The pane is sized in dvh on phones, so it changes on orientation flips, when
+ * the mobile URL bar collapses, and when the filter drawer opens — all of which
+ * leave grey tiles until we invalidate.
+ */
+function ResizeWatcher() {
+  const map = useMap();
+
+  useEffect(() => {
+    let frame = 0;
+    const observer = new ResizeObserver(() => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => map.invalidateSize());
+    });
+    observer.observe(map.getContainer());
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
+  }, [map]);
+
+  return null;
+}
+
 function ClickCapture({ onMapClick }: { onMapClick?: (lat: number, lng: number) => void }) {
   useMapEvents({
     click(e) {
@@ -76,6 +101,7 @@ export default function LeadMap({
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      <ResizeWatcher />
       <ClickCapture onMapClick={onMapClick} />
       {markers.map(({ lead, icon }) => (
         <Marker

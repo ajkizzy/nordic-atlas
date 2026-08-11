@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import dynamic from 'next/dynamic';
 import { createClient } from '@/lib/supabase/client';
 import type { BagPotential, Cuisine, Lead, LeadCategory, LeadStatus } from '@/types/db';
@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/Button';
 import { Input, Label, Select, Textarea } from '@/components/ui/Input';
 import { Card } from '@/components/ui/Card';
 import { cn } from '@/lib/utils';
-import { AlertTriangle, Check, ChevronDown, List, Map as MapIcon, Plus, RotateCcw, Search, Trash2, X } from 'lucide-react';
+import { AlertTriangle, Check, ChevronDown, List, Map as MapIcon, Phone, Plus, RotateCcw, Search, SlidersHorizontal, Trash2, X } from 'lucide-react';
 
 // Leaflet touches `window` — must skip SSR.
 const LeadMap = dynamic(() => import('./LeadMap'), {
@@ -26,6 +26,29 @@ const SWATCHES = ['', '#e11d48', '#f59e0b', '#3b82f6', '#8b5cf6', '#14b8a6', '#2
 
 type Draft = Partial<Lead> & { lat: number; lng: number };
 
+const DESKTOP_LIST = '(min-width: 1024px)'; // Tailwind `lg`
+
+/**
+ * Picks the list variant in JS rather than with `lg:hidden` / `hidden lg:table`.
+ * CSS only *hides* the losing variant — React still mounts it and the browser
+ * still builds its DOM. At 1000+ leads that doubles the node count and the
+ * mount cost of one `InlineStatusPicker` per row, which took list rendering
+ * from well under a second to tens of seconds.
+ */
+function useDesktopList() {
+  const subscribe = useCallback((onChange: () => void) => {
+    const query = window.matchMedia(DESKTOP_LIST);
+    query.addEventListener('change', onChange);
+    return () => query.removeEventListener('change', onChange);
+  }, []);
+
+  return useSyncExternalStore(
+    subscribe,
+    () => window.matchMedia(DESKTOP_LIST).matches,
+    () => true // SSR: the list is never the initial view, so this is unobservable
+  );
+}
+
 export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
   const supabase = useMemo(() => createClient(), []);
   const [leads, setLeads] = useState(initialLeads);
@@ -37,6 +60,10 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
   const [bagFilter, setBagFilter] = useState<BagPotential | 'all'>('all');
   const [selected, setSelected] = useState<Lead | null>(null);
   const [draft, setDraft] = useState<Draft | null>(null);
+  // Below lg: 5 category pills + 14 cuisine pills + 2 selects is ~340px of
+  // chrome, so the filters live behind a toggle. lg+ always shows them.
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const desktopList = useDesktopList();
   const [saving, setSaving] = useState(false);
   const [statusSavingId, setStatusSavingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -95,6 +122,12 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
         (statusFilter === 'all' || lead.status === statusFilter);
     });
   }, [leads, searchQuery, activeCats, activeCuisines, bagFilter, statusFilter]);
+
+  const activeFilterCount =
+    (activeCats.size < ALL_CATEGORIES.length ? 1 : 0) +
+    (activeCuisines.size < CUISINE_ORDER.length ? 1 : 0) +
+    (bagFilter !== 'all' ? 1 : 0) +
+    (statusFilter !== 'all' ? 1 : 0);
 
   function toggleCuisine(c: Cuisine) {
     setActiveCuisines((prev) => {
@@ -204,7 +237,10 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
   const editorTarget = draft ?? selected;
 
   return (
-    <div className="flex flex-col gap-4 h-[calc(100dvh-8rem)] md:h-[calc(100dvh-6rem)]">
+    // Phones let the page scroll and give the map/list pane a height of its own.
+    // Locking the whole workspace to the viewport made every toolbar row a
+    // subtraction from the pane, which collapsed it to nothing.
+    <div className="flex flex-col gap-3 lg:h-[calc(100dvh-7rem)] lg:gap-4">
       {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-2">
         <div className="flex rounded-md border border-slate-200 overflow-hidden">
@@ -223,24 +259,27 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
           ))}
         </div>
 
-        <div className="flex flex-wrap gap-1.5">
-          {ALL_CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => toggleCat(cat)}
-              className={cn(
-                'rounded-pill px-3 py-1 text-xs font-semibold border transition-colors',
-                activeCats.has(cat)
-                  ? 'bg-brand-50 border-brand-300 text-brand-800'
-                  : 'bg-white border-slate-200 text-slate-400'
-              )}
-            >
-              {CATEGORY_LABELS[cat]}
-            </button>
-          ))}
-        </div>
+        <button
+          type="button"
+          onClick={() => setFiltersOpen((open) => !open)}
+          aria-expanded={filtersOpen}
+          className={cn(
+            'lg:hidden inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-semibold',
+            filtersOpen || activeFilterCount > 0
+              ? 'border-brand-300 bg-brand-50 text-brand-800'
+              : 'border-slate-200 bg-white text-slate-600'
+          )}
+        >
+          <SlidersHorizontal size={15} />
+          Filters
+          {activeFilterCount > 0 && (
+            <span className="grid h-5 min-w-5 place-items-center rounded-pill bg-brand-700 px-1 text-[11px] text-white">
+              {activeFilterCount}
+            </span>
+          )}
+        </button>
 
-        <div className="relative ml-auto w-full sm:w-56 lg:w-64">
+        <div className="relative order-last w-full lg:order-none lg:ml-auto lg:w-64">
           <Search size={15} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
           <Input
             type="search"
@@ -263,62 +302,92 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
           )}
         </div>
 
-        <Select
-          value={bagFilter}
-          onChange={(e) => setBagFilter(e.target.value as BagPotential | 'all')}
-          className="w-auto"
+        <Button
+          size="sm"
+          onClick={() => { setSelected(null); setDraft({ lat: 55.641, lng: 12.080, category: 'restaurant', cuisine: 'other', status: 'new' }); }}
         >
-          <option value="all">All bag potential</option>
-          <option value="high">High bag use</option>
-          <option value="medium">Medium</option>
-          <option value="low">Low</option>
-        </Select>
-        <Select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value as LeadStatus | 'all')} className="w-auto">
-          <option value="all">All statuses</option>
-          {ALL_STATUSES.map((s) => (
-            <option key={s} value={s}>{s}</option>
-          ))}
-        </Select>
-        <Button size="sm" onClick={() => { setSelected(null); setDraft({ lat: 55.641, lng: 12.080, category: 'restaurant', cuisine: 'other', status: 'new' }); }}>
           <Plus size={14} /> New lead
         </Button>
       </div>
 
-      {/* Cuisine toggles — glyph matches the map pin */}
-      <div className="flex flex-wrap items-center gap-1.5 -mt-1">
-        {CUISINE_ORDER.map((c) => (
-          <button
-            key={c}
-            onClick={() => toggleCuisine(c)}
-            className={cn(
-              'inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-xs font-semibold border transition-colors',
-              activeCuisines.has(c)
-                ? 'bg-white border-slate-300 text-slate-700'
-                : 'bg-slate-50 border-slate-200 text-slate-300'
-            )}
+      {/* Filters — drawer on phones, always-on rows from md up */}
+      <div className={cn('flex-col gap-2 lg:flex', filtersOpen ? 'flex' : 'hidden')}>
+        <div className="flex flex-wrap items-center gap-1.5">
+          {ALL_CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => toggleCat(cat)}
+              className={cn(
+                'rounded-pill px-3 py-1 text-xs font-semibold border transition-colors',
+                activeCats.has(cat)
+                  ? 'bg-brand-50 border-brand-300 text-brand-800'
+                  : 'bg-white border-slate-200 text-slate-400'
+              )}
+            >
+              {CATEGORY_LABELS[cat]}
+            </button>
+          ))}
+
+          <Select
+            value={bagFilter}
+            onChange={(e) => setBagFilter(e.target.value as BagPotential | 'all')}
+            className="h-9 w-auto py-1 lg:ml-2"
           >
-            <CuisineIcon cuisine={c} size={13} />
-            {CUISINE_META[c].label}
+            <option value="all">All bag potential</option>
+            <option value="high">High bag use</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </Select>
+          <Select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value as LeadStatus | 'all')}
+            className="h-9 w-auto py-1"
+          >
+            <option value="all">All statuses</option>
+            {ALL_STATUSES.map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </Select>
+        </div>
+
+        {/* Cuisine toggles — glyph matches the map pin */}
+        <div className="flex flex-wrap items-center gap-1.5">
+          {CUISINE_ORDER.map((c) => (
+            <button
+              key={c}
+              onClick={() => toggleCuisine(c)}
+              className={cn(
+                'inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 text-xs font-semibold border transition-colors',
+                activeCuisines.has(c)
+                  ? 'bg-white border-slate-300 text-slate-700'
+                  : 'bg-slate-50 border-slate-200 text-slate-300'
+              )}
+            >
+              <CuisineIcon cuisine={c} size={13} />
+              {CUISINE_META[c].label}
+            </button>
+          ))}
+          <button
+            onClick={() => setActiveCuisines(new Set(activeCuisines.size === CUISINE_ORDER.length ? [] : CUISINE_ORDER))}
+            className="text-xs text-slate-400 hover:text-slate-700 underline ml-1"
+          >
+            {activeCuisines.size === CUISINE_ORDER.length ? 'none' : 'all'}
           </button>
-        ))}
-        <button
-          onClick={() => setActiveCuisines(new Set(activeCuisines.size === CUISINE_ORDER.length ? [] : CUISINE_ORDER))}
-          className="text-xs text-slate-400 hover:text-slate-700 underline ml-1"
-        >
-          {activeCuisines.size === CUISINE_ORDER.length ? 'none' : 'all'}
-        </button>
+        </div>
       </div>
 
-      <p className="text-xs text-slate-400 -mt-1">
-        {view === 'map' ? 'Tip: click anywhere on the map to drop a new lead at that spot.' : `${filtered.length} leads`}
+      <p className="text-xs text-slate-400">
+        {view === 'map' ? 'Tip: tap anywhere on the map to drop a new lead at that spot.' : `${filtered.length} leads`}
       </p>
 
-      <div className="flex flex-1 gap-4 min-h-0">
+      {/* Definite height on phones; fills the locked column from md up. The
+          min-height on both sides is what stops the pane collapsing again. */}
+      <div className="flex h-[65dvh] min-h-[22rem] gap-4 lg:h-auto lg:min-h-[20rem] lg:flex-1">
         {/* Map or list */}
         <div className="flex-1 min-w-0">
           {view === 'map' ? (
             <Card className="h-full overflow-hidden relative">
-              <div className="absolute right-3 bottom-6 z-[500] max-w-[15rem] hidden md:block">
+              <div className="absolute right-3 bottom-6 z-[500] max-w-[15rem] hidden lg:block">
                 <MapLegend />
               </div>
               <LeadMap
@@ -333,6 +402,49 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
             </Card>
           ) : (
             <Card className="h-full overflow-auto">
+              {/* Phones: stacked cards. The five-column table needs ~560px and
+                  is unreadable below that, so it only appears from md up. */}
+              {!desktopList && (
+              <ul className="divide-y divide-slate-100">
+                {filtered.map((l) => (
+                  <li key={l.id} className={cn('p-3', selected?.id === l.id && 'bg-brand-50/60')}>
+                    <button
+                      type="button"
+                      onClick={() => { setDraft(null); setSelected(l); }}
+                      className="block w-full text-left"
+                    >
+                      <p className="truncate font-medium text-slate-900">{l.name}</p>
+                      <p className="mt-0.5 flex items-center gap-1.5 text-xs text-slate-500">
+                        <CuisineIcon cuisine={l.cuisine} size={13} className="shrink-0 text-slate-400" />
+                        <span className="truncate">{CUISINE_META[l.cuisine].label} · {l.city ?? '—'}</span>
+                      </p>
+                    </button>
+                    <div className="mt-2 flex flex-wrap items-center gap-2">
+                      <InlineStatusPicker
+                        lead={l}
+                        disabled={statusSavingId === l.id}
+                        onChange={(status) => updateLeadStatus(l, status)}
+                      />
+                      {l.phone ? (
+                        <a
+                          href={`tel:${l.phone.replace(/[^+\d]/g, '')}`}
+                          className="inline-flex h-8 items-center gap-1.5 rounded-md border border-slate-200 px-2.5 text-xs font-semibold text-brand-700"
+                        >
+                          <Phone size={13} /> {l.phone}
+                        </a>
+                      ) : (
+                        <span className="text-xs text-slate-400">No phone</span>
+                      )}
+                    </div>
+                  </li>
+                ))}
+                {filtered.length === 0 && (
+                  <li className="px-4 py-8 text-center text-slate-400">No leads match the current filters.</li>
+                )}
+              </ul>
+              )}
+
+              {desktopList && (
               <table className="w-full text-sm">
                 <thead className="sticky top-0 bg-slate-50 text-left text-xs uppercase tracking-wide text-slate-500">
                   <tr>
@@ -385,6 +497,7 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
                   )}
                 </tbody>
               </table>
+              )}
             </Card>
           )}
         </div>
@@ -406,20 +519,28 @@ export function MapWorkspace({ initialLeads }: { initialLeads: Lead[] }) {
         )}
       </div>
 
-      {/* Mobile editor (bottom sheet style) */}
+      {/* Mobile editor (bottom sheet style). A stray map tap opens this, so it
+          needs a backdrop to dismiss against. */}
       {editorTarget && (
-        <div className="lg:hidden fixed inset-x-0 bottom-0 z-50 max-h-[70dvh] overflow-auto bg-white border-t border-slate-200 rounded-t-2xl shadow-2xl">
-          <LeadEditor
-            key={(selected?.id ?? 'new') + '-m'}
-            lead={editorTarget}
-            isNew={!!draft}
-            saving={saving}
-            error={error}
-            onClose={() => { setSelected(null); setDraft(null); setError(null); }}
-            onSave={(patch) => saveLead(patch, selected?.id)}
-            onDelete={selected ? () => setDeleteCandidate(selected) : undefined}
+        <>
+          <div
+            className="lg:hidden fixed inset-0 z-40 bg-slate-950/40"
+            onClick={() => { setSelected(null); setDraft(null); setError(null); }}
+            aria-hidden
           />
-        </div>
+          <div className="lg:hidden fixed inset-x-0 bottom-0 z-50 max-h-[80dvh] overflow-auto overscroll-contain bg-white border-t border-slate-200 rounded-t-2xl shadow-2xl pb-[env(safe-area-inset-bottom)]">
+            <LeadEditor
+              key={(selected?.id ?? 'new') + '-m'}
+              lead={editorTarget}
+              isNew={!!draft}
+              saving={saving}
+              error={error}
+              onClose={() => { setSelected(null); setDraft(null); setError(null); }}
+              onSave={(patch) => saveLead(patch, selected?.id)}
+              onDelete={selected ? () => setDeleteCandidate(selected) : undefined}
+            />
+          </div>
+        </>
       )}
 
       {deleteCandidate && (
@@ -627,24 +748,51 @@ function InlineStatusPicker({
   disabled: boolean;
   onChange: (status: LeadStatus) => void;
 }) {
-  const [open, setOpen] = useState(false);
+  const [menu, setMenu] = useState<{ top: number; left: number } | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const open = menu !== null;
 
   useEffect(() => {
     if (!open) return;
     const closeOnOutsideClick = (event: MouseEvent) => {
-      if (!containerRef.current?.contains(event.target as Node)) setOpen(false);
+      if (!containerRef.current?.contains(event.target as Node)) setMenu(null);
     };
+    const close = () => setMenu(null);
     document.addEventListener('mousedown', closeOnOutsideClick);
-    return () => document.removeEventListener('mousedown', closeOnOutsideClick);
+    // The menu is viewport-anchored, so any scroll would detach it.
+    window.addEventListener('scroll', close, true);
+    window.addEventListener('resize', close);
+    return () => {
+      document.removeEventListener('mousedown', closeOnOutsideClick);
+      window.removeEventListener('scroll', close, true);
+      window.removeEventListener('resize', close);
+    };
   }, [open]);
+
+  // Anchored to the viewport rather than the button: the list Card is
+  // `overflow-auto`, which would clip an absolutely positioned menu on the
+  // rows nearest its bottom edge.
+  function toggleMenu() {
+    if (open) return setMenu(null);
+    const rect = buttonRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const menuWidth = 160; // w-40
+    const menuHeight = ALL_STATUSES.length * 36 + 8; // h-9 rows + py-1
+    const fitsBelow = window.innerHeight - rect.bottom > menuHeight + 8;
+    setMenu({
+      top: fitsBelow ? rect.bottom + 4 : Math.max(8, rect.top - menuHeight - 4),
+      left: Math.min(Math.max(8, rect.right - menuWidth), window.innerWidth - menuWidth - 8),
+    });
+  }
 
   return (
     <div ref={containerRef} className="relative inline-block">
       <button
+        ref={buttonRef}
         type="button"
         disabled={disabled}
-        onClick={() => setOpen((current) => !current)}
+        onClick={toggleMenu}
         className="inline-flex h-8 min-w-32 items-center gap-2 rounded-md border border-slate-200 bg-white px-2.5 text-xs font-semibold capitalize text-slate-700 hover:border-slate-300 hover:bg-slate-50 disabled:opacity-60"
         aria-haspopup="listbox"
         aria-expanded={open}
@@ -655,11 +803,12 @@ function InlineStatusPicker({
         <ChevronDown size={14} className="text-slate-400" />
       </button>
 
-      {open && (
+      {menu && (
         <div
           role="listbox"
           aria-label={`Status for ${lead.name}`}
-          className="absolute right-0 z-30 mt-1 w-40 overflow-hidden rounded-md border border-slate-200 bg-white py-1 shadow-lg"
+          style={{ top: menu.top, left: menu.left }}
+          className="fixed z-[900] w-40 overflow-hidden rounded-md border border-slate-200 bg-white py-1 shadow-lg"
         >
           {ALL_STATUSES.map((status) => (
             <button
@@ -668,7 +817,7 @@ function InlineStatusPicker({
               role="option"
               aria-selected={lead.status === status}
               onClick={() => {
-                setOpen(false);
+                setMenu(null);
                 onChange(status);
               }}
               className="flex h-9 w-full items-center gap-2 px-3 text-left text-sm capitalize text-slate-700 hover:bg-slate-50"

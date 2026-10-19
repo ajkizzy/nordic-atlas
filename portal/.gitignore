@@ -6,3 +6,7 @@ node_modules/
 next-env.d.ts
 
 .vercel
+
+# Local lead imports and generated sales prospect reports
+/data/lead-imports/imported/*
+!/data/lead-imports/imported/.gitkeep
